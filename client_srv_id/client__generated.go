@@ -10,6 +10,8 @@ import (
 
 type ClientSrvIDInterface interface {
 	GenerateID(metas ...github_com_eden_framework_courier.Metadata) (resp *GenerateIDResponse, err error)
+	SwaggerDoc(metas ...github_com_eden_framework_courier.Metadata) (resp *SwaggerDocResponse, err error)
+	SwaggerUIBundle(metas ...github_com_eden_framework_courier.Metadata) (resp *SwaggerUIBundleResponse, err error)
 }
 
 type ClientSrvID struct {
@@ -51,4 +53,38 @@ func (c ClientSrvID) GenerateID(metas ...github_com_eden_framework_courier.Metad
 type GenerateIDResponse struct {
 	Meta github_com_eden_framework_courier.Metadata
 	Body GenerateIDResp
+}
+
+func (c ClientSrvID) SwaggerDoc(metas ...github_com_eden_framework_courier.Metadata) (resp *SwaggerDocResponse, err error) {
+	resp = &SwaggerDocResponse{}
+	resp.Meta = github_com_eden_framework_courier.Metadata{}
+
+	err = c.Request(c.Name+".SwaggerDoc", "GET", "/id/doc", nil, metas...).
+		Do().
+		BindMeta(resp.Meta).
+		Into(&resp.Body)
+
+	return
+}
+
+type SwaggerDocResponse struct {
+	Meta github_com_eden_framework_courier.Metadata
+	Body []byte
+}
+
+func (c ClientSrvID) SwaggerUIBundle(metas ...github_com_eden_framework_courier.Metadata) (resp *SwaggerUIBundleResponse, err error) {
+	resp = &SwaggerUIBundleResponse{}
+	resp.Meta = github_com_eden_framework_courier.Metadata{}
+
+	err = c.Request(c.Name+".SwaggerUIBundle", "GET", "/id/swagger-ui-bundle.js", nil, metas...).
+		Do().
+		BindMeta(resp.Meta).
+		Into(&resp.Body)
+
+	return
+}
+
+type SwaggerUIBundleResponse struct {
+	Meta github_com_eden_framework_courier.Metadata
+	Body []byte
 }
