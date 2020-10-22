@@ -1,0 +1,14 @@
+package client_srv_id
+
+import (
+	github_com_eden_framework_courier_status_error "github.com/eden-framework/courier/status_error"
+	github_com_eden_framework_srv_id_internal_routers_v0 "github.com/eden-framework/srv-id/internal/routers/v0"
+)
+
+type GenerateIDResp = github_com_eden_framework_srv_id_internal_routers_v0.GenerateIDResp
+
+type GithubComEdenFrameworkCourierStatusErrorErrorField = github_com_eden_framework_courier_status_error.ErrorField
+
+type GithubComEdenFrameworkCourierStatusErrorErrorFields = github_com_eden_framework_courier_status_error.ErrorFields
+
+type GithubComEdenFrameworkCourierStatusErrorStatusError = github_com_eden_framework_courier_status_error.StatusError
